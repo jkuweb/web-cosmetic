@@ -482,7 +482,7 @@ body {
 }
 
 .heading-primary {
-  font-size: 6em;
+  font-size: clamp(2em, 6vw, 6em);
   font-family: "Amiri", serif;
   position: relative;
 }
@@ -510,6 +510,7 @@ body {
   position: relative;
   margin: 0 auto;
   cursor: pointer;
+  transition: all 1s ease-in;
 }
 .btn:before {
   content: "";
@@ -557,9 +558,27 @@ body {
 .box-background {
   grid-column: 3/-1;
   grid-row: 2;
-  background-color: #ecd4d8;
+  background-color: transparent;
+  transform: translateX(-100vh);
+  transition: all 1.6s ease;
 }
 
+@media only screen and (max-width: 77em) {
+  .box-right {
+    grid-column: 3/5;
+  }
+
+  .box-left {
+    grid-column: 2/5;
+  }
+  .box-left__top {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    align-self: center;
+  }
+}
 .grid {
   min-height: 100vh;
   display: grid;
@@ -589,6 +608,7 @@ body {
 .main-nav {
   grid-column: 5;
   height: 100%;
+  z-index: 1;
 }
 .main-nav__list {
   display: flex;
@@ -608,7 +628,10 @@ body {
 }
 .secondary-nav__link {
   display: inline-block;
-  padding: 1em;
+  transition: all 1.6 ease;
+}
+.secondary-nav__link::hover {
+  background-color: pink;
 }
 .secondary-nav__circle {
   display: inline-block;
@@ -616,25 +639,69 @@ body {
   height: 10px;
   border-radius: 50%;
   border: 1px solid #000;
+  transition: all 0.3s ease;
 }
 .secondary-nav__circle--black {
   background-color: #000;
 }
 
+@media only screen and (max-width: 77em) {
+  .main-nav {
+    grid-column: 1;
+  }
+  .main-nav__list {
+    flex-direction: column;
+  }
+}
 .social {
   grid-column: 1;
   grid-row: 2;
   width: 100%;
   background-color: #CBD5E0;
   text-align: center;
+  transform: translateY(-100vh);
+  transition: all 1.6s ease;
 }
 .social__list {
   position: relative;
   top: -3.6rem;
+  transform: translateY(-100vh);
+  transition: all 2s ease;
 }
 .social__item:not(:last-child) {
   margin-bottom: 1rem;
 }
 .social__link {
   color: #4A5568;
+}
+
+.box-background-animate {
+  transform: translateX(0);
+  background-color: pink;
+  z-index: -2;
+}
+
+.social-animate {
+  transform: translateX(0);
+}
+.social-animate__list {
+  transform: translateX(0);
+}
+
+.btn-animate {
+  font-size: 1.5em;
+}
+
+body:hover .secondary-nav__link {
+  padding: 1em;
+}
+
+h1 span span {
+  opacity: 0;
+  transition: all 1.5s ease;
+  display: inline-block;
+}
+
+.heading-primary-text .fade {
+  opacity: 1;
 }
